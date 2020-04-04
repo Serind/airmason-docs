@@ -1,0 +1,6 @@
+employee_id,email,first_name,last_name,dob,team_name,location,state
+emp101,abc1@xyz.com,Vikas,,26/01/1994,IT,Toronto,Ontario
+emp102,abc2@xyz.com,Dave,Sandhu,,Management,Ottawa,Ontario
+emp103,abc3@xyz.com,Justin,,26/02/1992,Management,Toronto,Ontario
+emp104,abc4@xyz.com,Emily,,,IT,Toronto,Ontario
+emp105,abc5@xyz.com,Daniel,Tabak,24/01/1993,IT,Toronto,Ontario

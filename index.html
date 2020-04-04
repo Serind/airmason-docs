@@ -1,0 +1,506 @@
+  
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1"
+        />
+        <title>AirMason v1.0.0</title>
+
+        <style></style>
+        <link rel="stylesheet" media="screen" href="pub/css/screen.css"> <link rel="stylesheet" media="print" href="pub/css/print.css"> <link rel="stylesheet" media="screen" href="pub/css/darkula.css">  <script src="source/javascripts/lib/_jquery.js"></script>
+<script src="source/javascripts/lib/_jquery.highlight.js"></script>
+<script src="source/javascripts/lib/_lunr.js"></script>
+<script src="source/javascripts/lib/_imagesloaded.min.js"></script>
+<script src="source/javascripts/lib/_energize.js"></script>
+<script src="source/javascripts/app/_lang.js"></script>
+<script src="source/javascripts/app/_search.js"></script>
+<script src="source/javascripts/app/_toc.js"></script>
+<script type="text/javascript">
+$(function() {
+  loadToc($('#toc'), '.toc-link', '.toc-list-h2, .toc-list-h3, .toc-list-h4, .toc-list-h5, .toc-list-h6', 10);
+  setupLanguages($('body').data('languages'));
+  $('.content').imagesLoaded( function() {
+    recacheHeights();
+    refreshToc();
+  });
+});
+
+window.onpopstate = function() {
+  activateLanguage(getLanguageFromQueryString());
+};
+</script>
+  <meta name="theme-color" content="#F3F7F9" />
+<!-- Renderer: Shins v2.4.1-0 -->
+<!-- To play around with a few examples, we recommend a REST client called Postman. Simply tap the button below to import a pre-made collection of examples. -->
+  <!-- prettier-ignore -->
+  <!-- prettier-ignore -->
+    </head>
+
+    <body data-languages="[&quot;shell&quot;,&quot;javascript&quot;]">
+        <a href="#" id="nav-button">
+            <span>
+                NAV <img src="source/images/navbar.png" class="undefined" alt="Navigation">
+            </span>
+        </a>
+        <div class="toc-wrapper">
+            <div class="logo-container">
+                <img src="source/images/logo.png" class="logo" alt="Logo"> 
+                <span class="logo-text">AirMason docs</span>
+            </div>
+            <div class="lang-selector">
+                 
+                <a
+                    href="#"
+                    data-language-name="shell"
+                    >Shell</a
+                >
+                  
+                <a
+                    href="#"
+                    data-language-name="javascript"
+                    >NodeJS</a
+                >
+                 
+            </div>
+             
+            <div class="search">
+                <input
+                    type="text"
+                    class="search"
+                    id="input-search"
+                    placeholder="Search"
+                />
+            </div>
+            <ul class="search-results"></ul>
+            
+            <div id="toc" class="toc-list-h1">
+                <ul class="toc-list-h1">
+                    
+                    <li>
+                        <a
+                            href="#api-reference"
+                            class="toc-h1 toc-link"
+                            data-title="API Reference"
+                            >API Reference</a
+                        >
+                        
+                    </li>
+                    
+                    <li>
+                        <a
+                            href="#authentication"
+                            class="toc-h1 toc-link"
+                            data-title="Authentication"
+                            >Authentication</a
+                        >
+                        
+                    </li>
+                    
+                    <li>
+                        <a
+                            href="#errors"
+                            class="toc-h1 toc-link"
+                            data-title="Errors"
+                            >Errors</a
+                        >
+                        
+                        <ul class="toc-list-h2">
+                            
+                            <li>
+                                <a
+                                    href="#error-response-params"
+                                    class="toc-h2 toc-link"
+                                    data-title=""
+                                    >Error response params</a
+                                >
+                                
+                            </li>
+                            
+                        </ul>
+                        
+                    </li>
+                    
+                    <li>
+                        <a
+                            href="#import-employees-api"
+                            class="toc-h1 toc-link"
+                            data-title="Import Employees API"
+                            >Import Employees API</a
+                        >
+                        
+                        <ul class="toc-list-h2">
+                            
+                            <li>
+                                <a
+                                    href="#request"
+                                    class="toc-h2 toc-link"
+                                    data-title=""
+                                    >Request</a
+                                >
+                                
+                            </li>
+                            
+                            <li>
+                                <a
+                                    href="#response"
+                                    class="toc-h2 toc-link"
+                                    data-title=""
+                                    >Response</a
+                                >
+                                
+                            </li>
+                            
+                        </ul>
+                        
+                    </li>
+                    
+                </ul>
+            </div>
+            
+        </div>
+        <div class="page-wrapper">
+            <div class="dark-box"></div>
+            <div class="content">
+                <h1 id="api-reference">API Reference</h1>
+<p>Welcome to AirMason's API! You can use this documentation to access all our third party API endpoints, such as importing employees.</p>
+<p>The API is organized around REST. All requests should be made over SSL. All request and response bodies, including errors, are encoded in JSON.</p>
+<p>We also have some specific language bindings to make integration easier. You can switch the programming language of the examples with the tabs in the top right.</p>
+<p>Currently we support the following official client bindings:</p>
+<ul>
+<li>Shell</li>
+<li>NodeJS</li>
+</ul>
+<h1 id="authentication">Authentication</h1>
+<blockquote>
+<p>Example request.</p>
+</blockquote>
+<pre class="highlight tab tab-shell"><code>  curl --location --request PUT <span class="hljs-string">'https://dev-api.airmason.com/v1/employees/import'</span> \
+    --header <span class="hljs-string">'Authorization: Apikey xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'</span>
+</code></pre>
+<pre class="highlight tab tab-javascript"><code>  <span class="hljs-keyword">const</span> request = <span class="hljs-built_in">require</span>(<span class="hljs-string">"request"</span>);
+  
+  request({
+    <span class="hljs-attr">method</span>: <span class="hljs-string">"PUT"</span>,
+    <span class="hljs-attr">url</span>: <span class="hljs-string">"https://dev-api.airmason.com/v1/employees/import"</span>,
+    <span class="hljs-attr">headers</span>: {
+      <span class="hljs-attr">Authorization</span>: <span class="hljs-string">"Apikey xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"</span>,
+    }
+  }, (error, response) =&gt; {});
+</code></pre>
+<p>Authentication is done via the API key over HTTPS. Unauthenticated requests will return an HTTP 401 response.</p>
+<p><a href="https://www.airmason.com/contact">Reach out to us</a> for obtaining a API key</p>
+<h1 id="errors">Errors</h1>
+<p>Our API returns standard HTTP success or error status codes. For errors, we will also include extra information about what went wrong encoded in the response as JSON. The various HTTP status codes we might return are listed below.</p>
+<p>HTTP Status codes</p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Title</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>OK</td>
+<td>The request was successful</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Bad request</td>
+<td>Bad request</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized</td>
+<td>Your API key is invalid or not provided</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not found</td>
+<td>The resource does not exist</td>
+</tr>
+<tr>
+<td>422</td>
+<td>Validation error</td>
+<td>A validation error occurred</td>
+</tr>
+<tr>
+<td>50X</td>
+<td>Internal Server Error</td>
+<td>An error occurred with our API.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="error-response-params">Error response params</h2>
+<blockquote>
+<p>Example error response.</p>
+</blockquote>
+<pre class="highlight tab tab-shell"><code>  {
+    <span class="hljs-string">"errors"</span>: [
+      {
+        <span class="hljs-string">"msg"</span>: <span class="hljs-string">"Invalid value"</span>,
+        <span class="hljs-string">"param"</span>: <span class="hljs-string">"isPatch"</span>,
+        <span class="hljs-string">"location"</span>: <span class="hljs-string">"body"</span>
+      },
+      {
+        <span class="hljs-string">"msg"</span>: <span class="hljs-string">"Invalid value"</span>,
+        <span class="hljs-string">"param"</span>: <span class="hljs-string">"organizationId"</span>,
+        <span class="hljs-string">"location"</span>: <span class="hljs-string">"body"</span>
+      }
+    ]
+  }
+</code></pre>
+<pre class="highlight tab tab-javascript"><code>  {
+    <span class="hljs-string">"errors"</span>: [
+      {
+        <span class="hljs-string">"msg"</span>: <span class="hljs-string">"Invalid value"</span>,
+        <span class="hljs-string">"param"</span>: <span class="hljs-string">"isPatch"</span>,
+        <span class="hljs-string">"location"</span>: <span class="hljs-string">"body"</span>
+      },
+      {
+        <span class="hljs-string">"msg"</span>: <span class="hljs-string">"Invalid value"</span>,
+        <span class="hljs-string">"param"</span>: <span class="hljs-string">"organizationId"</span>,
+        <span class="hljs-string">"location"</span>: <span class="hljs-string">"body"</span>
+      }
+    ]
+  }
+</code></pre>
+<p>All errors are returned in the form of JSON with a type and optional message.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>msg</td>
+<td>true</td>
+<td>Type of error</td>
+</tr>
+<tr>
+<td>param</td>
+<td>false</td>
+<td>Parameter name</td>
+</tr>
+<tr>
+<td>location</td>
+<td>false</td>
+<td>&quot;body&quot;</td>
+</tr>
+</tbody>
+</table>
+<h1 id="import-employees-api">Import Employees API</h1>
+<p>This API lets you import employees into your organization.</p>
+<h2 id="request">Request</h2>
+<p>Import employees in organization</p>
+<h3 id="url">URL</h3>
+<p><code>PUT https://dev-api.airmason.com/v1/employees/import</code></p>
+<h3 id="params">Params</h3>
+<pre class="highlight tab tab-shell"><code>  curl --location --request PUT <span class="hljs-string">'https://dev-api.airmason.com/v1/employees/import'</span> \
+    --header <span class="hljs-string">'Authorization: Apikey xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'</span> \
+    --form <span class="hljs-string">'file=@/filepath/filename.csv'</span> \
+    --form <span class="hljs-string">'isPatch=0'</span>
+</code></pre>
+<pre class="highlight tab tab-javascript"><code>  <span class="hljs-keyword">const</span> request = <span class="hljs-built_in">require</span>(<span class="hljs-string">'request'</span>);
+  <span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>);
+  
+  request({
+    <span class="hljs-string">'method'</span>: <span class="hljs-string">'PUT'</span>,
+    <span class="hljs-string">'url'</span>: <span class="hljs-string">'https://dev-api.airmason.com/v1/employees/import'</span>,
+    <span class="hljs-string">'headers'</span>: {
+      <span class="hljs-string">'Authorization'</span>: <span class="hljs-string">'Apikey xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'</span>
+    },
+    <span class="hljs-attr">formData</span>: {
+      <span class="hljs-string">'file'</span>: {
+        <span class="hljs-string">'value'</span>: fs.createReadStream(<span class="hljs-string">'filepath/filename.csv'</span>),
+        <span class="hljs-string">'options'</span>: {
+          <span class="hljs-string">'filename'</span>: <span class="hljs-string">'filename.csv'</span>,
+          <span class="hljs-string">'contentType'</span>: <span class="hljs-literal">null</span>
+        }
+      },
+      <span class="hljs-string">'isPatch'</span>: <span class="hljs-string">'0'</span>
+    }
+  }, (error, response) =&gt; {});
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>In</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Authorization</td>
+<td>string</td>
+<td>header</td>
+<td>true</td>
+<td>Generated api key</td>
+</tr>
+<tr>
+<td>file</td>
+<td>file</td>
+<td>body</td>
+<td>true</td>
+<td>CSV of employee list <br /><a href="/csv/employee-import-sample-csv.csv">Download sample csv</a> <br /> CSV file params are described below</td>
+</tr>
+<tr>
+<td>isPatch</td>
+<td>number</td>
+<td>body</td>
+<td>true</td>
+<td><strong>0</strong> or <strong>1</strong>. <br /> <strong>0</strong> - Consider it as complete list of employees. <br /> <strong>1</strong> - Add these employees to existing employees</td>
+</tr>
+</tbody>
+</table>
+<h3 id="csv-file-params">CSV file params</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>employee_id</td>
+<td>string</td>
+<td>true</td>
+<td>Employee id</td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+<td>false</td>
+<td>Employee email address</td>
+</tr>
+<tr>
+<td>first_name</td>
+<td>string</td>
+<td>true</td>
+<td>Employee first name</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td>string</td>
+<td>false</td>
+<td>Employee last name</td>
+</tr>
+<tr>
+<td>dob</td>
+<td>dd/mm/yyyy</td>
+<td>false</td>
+<td>Employee date of birth</td>
+</tr>
+<tr>
+<td>team_name</td>
+<td>string</td>
+<td>false</td>
+<td>Employee team name</td>
+</tr>
+<tr>
+<td>location</td>
+<td>string</td>
+<td>false</td>
+<td>Employee location</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+<td>false</td>
+<td>Employee location state</td>
+</tr>
+</tbody>
+</table>
+<h2 id="response">Response</h2>
+<blockquote>
+<p>Example response.</p>
+</blockquote>
+<pre class="highlight tab tab-shell"><code>  {
+    <span class="hljs-string">"data"</span>: {
+      <span class="hljs-string">"total"</span>: 5,
+      <span class="hljs-string">"imported"</span>: 3,
+      <span class="hljs-string">"errorIn"</span>: [3, 6]
+    }
+  }
+</code></pre>
+<pre class="highlight tab tab-javascript"><code>  {
+    <span class="hljs-string">"data"</span>: {
+      <span class="hljs-string">"total"</span>: <span class="hljs-number">5</span>,
+      <span class="hljs-string">"imported"</span>: <span class="hljs-number">3</span>,
+      <span class="hljs-string">"errorIn"</span>: [<span class="hljs-number">3</span>, <span class="hljs-number">6</span>]
+    }
+  }
+</code></pre>
+<h3 id="response-params">Response params</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>total</td>
+<td>true</td>
+<td>number</td>
+<td>Total number of employees processed</td>
+</tr>
+<tr>
+<td>imported</td>
+<td>true</td>
+<td>number</td>
+<td>Number of employees imported (created/updated)</td>
+</tr>
+<tr>
+<td>errorIn</td>
+<td>true</td>
+<td>number[]</td>
+<td>CSV row numbers that have validation issues</td>
+</tr>
+</tbody>
+</table>
+<!-- Renderer: Shins v2.4.1-0 -->
+<!-- To play around with a few examples, we recommend a REST client called Postman. Simply tap the button below to import a pre-made collection of examples. -->
+  <!-- prettier-ignore -->
+  <!-- prettier-ignore -->
+            </div>
+            <div class="dark-box">
+                
+                <div class="lang-selector">
+                     
+                    <a
+                        href="#"
+                        data-language-name="shell"
+                        >Shell</a
+                    >
+                      
+                    <a
+                        href="#"
+                        data-language-name="javascript"
+                        >NodeJS</a
+                    >
+                     
+                </div>
+                
+            </div>
+        </div>
+    </body>
+</html>
