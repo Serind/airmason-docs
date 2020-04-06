@@ -102,20 +102,30 @@ window.onpopstate = function() {
                     
                     <li>
                         <a
-                            href="#errors"
+                            href="#api-response"
                             class="toc-h1 toc-link"
-                            data-title="Errors"
-                            >Errors</a
+                            data-title="API Response"
+                            >API Response</a
                         >
                         
                         <ul class="toc-list-h2">
                             
                             <li>
                                 <a
-                                    href="#error-response-params"
+                                    href="#error-response"
                                     class="toc-h2 toc-link"
                                     data-title=""
-                                    >Error response params</a
+                                    >Error Response</a
+                                >
+                                
+                            </li>
+                            
+                            <li>
+                                <a
+                                    href="#success-response"
+                                    class="toc-h2 toc-link"
+                                    data-title=""
+                                    >Success Response</a
                                 >
                                 
                             </li>
@@ -193,9 +203,8 @@ window.onpopstate = function() {
 </code></pre>
 <p>Authentication is done via the API key over HTTPS. Unauthenticated requests will return an HTTP 401 response.</p>
 <p><a href="https://www.airmason.com/contact">Reach out to us</a> for obtaining a API key</p>
-<h1 id="errors">Errors</h1>
+<h1 id="api-response">API Response</h1>
 <p>Our API returns standard HTTP success or error status codes. For errors, we will also include extra information about what went wrong encoded in the response as JSON. The various HTTP status codes we might return are listed below.</p>
-<p>HTTP Status codes</p>
 <table>
 <thead>
 <tr>
@@ -237,7 +246,7 @@ window.onpopstate = function() {
 </tr>
 </tbody>
 </table>
-<h2 id="error-response-params">Error response params</h2>
+<h2 id="error-response">Error Response</h2>
 <blockquote>
 <p>Example error response.</p>
 </blockquote>
@@ -271,7 +280,7 @@ window.onpopstate = function() {
     ]
   }
 </code></pre>
-<p>All errors are returned in the form of JSON with a type and optional message.</p>
+<p>In case API encounter an error, response JSON will return with <code>errors</code> key (of type <code>array</code>). Various error params that API might return are mentioned below:</p>
 <table>
 <thead>
 <tr>
@@ -294,10 +303,27 @@ window.onpopstate = function() {
 <tr>
 <td>location</td>
 <td>false</td>
-<td>&quot;body&quot;</td>
+<td>body | query | param | header</td>
 </tr>
 </tbody>
 </table>
+<h2 id="success-response">Success Response</h2>
+<blockquote>
+<p>Example error response.</p>
+</blockquote>
+<pre class="highlight tab tab-shell"><code>  {
+    <span class="hljs-string">"data"</span>: {
+      ...
+    }
+  }
+</code></pre>
+<pre class="highlight tab tab-javascript"><code>  {
+    <span class="hljs-string">"data"</span>: {
+      ...
+    }
+  }
+</code></pre>
+<p>In case of success, response JSON will return with <code>data</code> key (of type <code>object</code>).</p>
 <h1 id="import-employees-api">Import Employees API</h1>
 <p>This API lets you import employees into your organization.</p>
 <h2 id="request">Request</h2>
@@ -430,7 +456,7 @@ window.onpopstate = function() {
 <blockquote>
 <p>Example response.</p>
 </blockquote>
-<pre class="highlight tab tab-shell"><code> {
+<pre class="highlight tab tab-shell"><code>  {
     <span class="hljs-string">"data"</span>: {
       <span class="hljs-string">"total"</span>: 5,
       <span class="hljs-string">"imported"</span>: 3,

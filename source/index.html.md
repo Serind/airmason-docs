@@ -48,11 +48,9 @@ Authentication is done via the API key over HTTPS. Unauthenticated requests will
 
 [Reach out to us](https://www.airmason.com/contact) for obtaining a API key
 
-# Errors
+# API Response
 
 Our API returns standard HTTP success or error status codes. For errors, we will also include extra information about what went wrong encoded in the response as JSON. The various HTTP status codes we might return are listed below.
-
-HTTP Status codes
 
 | Code | Title                 | Description                             |
 | ---- | --------------------- | --------------------------------------- |
@@ -63,7 +61,7 @@ HTTP Status codes
 | 422  | Validation error      | A validation error occurred             |
 | 50X  | Internal Server Error | An error occurred with our API.         |
 
-## Error response params
+## Error Response
 
 > Example error response.
 
@@ -101,13 +99,35 @@ HTTP Status codes
   }
 ```
 
-All errors are returned in the form of JSON with a type and optional message.
+In case API encounter an error, response JSON will return with `errors` key (of type `array`). Various error params that API might return are mentioned below:
 
-| Parameter | Required | Description    |
-| --------- | -------- | -------------- |
-| msg       | true     | Type of error  |
-| param     | false    | Parameter name |
-| location  | false    | "body"         |
+| Parameter | Required | Description                      |
+| --------- | -------- | -------------------------------- |
+| msg       | true     | Type of error                    |
+| param     | false    | Parameter name                   |
+| location  | false    | body \| query \| param \| header |
+
+## Success Response
+
+> Example error response.
+
+```shell
+  {
+    "data": {
+      ...
+    }
+  }
+```
+
+```javascript
+  {
+    "data": {
+      ...
+    }
+  }
+```
+
+In case of success, response JSON will return with `data` key (of type `object`).
 
 # Import Employees API
 
@@ -177,7 +197,7 @@ Import employees in organization
 > Example response.
 
 ```shell
- {
+  {
     "data": {
       "total": 5,
       "imported": 3,
