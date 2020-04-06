@@ -177,11 +177,20 @@ Import employees in organization
 > Example response.
 
 ```shell
-  {
+ {
     "data": {
       "total": 5,
       "imported": 3,
-      "errorIn": [3, 6]
+      "errorInRows": [
+        {
+          "rowNumber": 3,
+          "fieldName": "first_name"
+        },
+        {
+          "rowNumber": 6,
+          "fieldName": "employee_id"
+        }
+      ]
     }
   }
 ```
@@ -191,15 +200,26 @@ Import employees in organization
     "data": {
       "total": 5,
       "imported": 3,
-      "errorIn": [3, 6]
+      "errorInRows": [
+        {
+          "rowNumber": 3,
+          "fieldName": "first_name"
+        },
+        {
+          "rowNumber": 6,
+          "fieldName": "employee_id"
+        }
+      ]
     }
   }
 ```
 
 ### Response params
 
-| Parameter | Required | Type     | Description                                    |
-| --------- | -------- | -------- | ---------------------------------------------- |
-| total     | true     | number   | Total number of employees processed            |
-| imported  | true     | number   | Number of employees imported (created/updated) |
-| errorIn   | true     | number[] | CSV row numbers that have validation issues    |
+| Parameter             | Required | Type   | Description                                    |
+| --------------------- | -------- | ------ | ---------------------------------------------- |
+| total                 | true     | number | Total number of employees processed            |
+| imported              | true     | number | Number of employees imported (created/updated) |
+| errorInRows           | true     | array  | List of validation issues                      |
+| errorInRows.rowNumber | true     | number | CSV row number that has validation issue       |
+| errorInRows.fieldName | true     | string | CSV field name that has validation issue       |
