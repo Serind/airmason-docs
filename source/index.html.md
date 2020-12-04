@@ -191,6 +191,7 @@ Import employees in organization
 | team_name   | string     | false    | Employee team name      |
 | location    | string     | false    | Employee location       |
 | state       | string     | false    | Employee location state |
+| source_id   | string     | false    | Employee source id      |
 
 ## Response
 
